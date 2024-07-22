@@ -6,15 +6,15 @@ export const config = {
 
 export default function middleware(req: NextRequest) {
   const basicAuth = req.headers.get("authorization");
-  if (process.env.ENV === "prodction" || "local") return;
+  if (process.env.NEXT_PUBLIC_ENV === "prodction" || "local") return;
 
   if (basicAuth) {
     const authValue = basicAuth.split(" ")[1];
     const [user, password] = atob(authValue).split(":");
 
     if (
-      user === process.env.BASIC_USER &&
-      password === process.env.BASIC_PASS
+      user === process.env.NEXT_PUBLIC_BASIC_USER &&
+      password === process.env.NEXT_PUBLIC_BASIC_PASS
     ) {
       return NextResponse.next();
     }
